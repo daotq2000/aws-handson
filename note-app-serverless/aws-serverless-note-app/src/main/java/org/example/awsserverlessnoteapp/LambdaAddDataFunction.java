@@ -22,7 +22,8 @@ public class LambdaAddDataFunction implements RequestHandler<Map<String,String>,
         itemValues.forEach((k, v) -> item.put(k, new AttributeValue().withS(v.toString())));
         PutItemRequest request = new PutItemRequest();
         request.setTableName(TABLE_NAME);
+        request.setItem(item);
         ddb.putItem(request);
-        return request.getReturnValues();
+        return item.toString();
     }
 }

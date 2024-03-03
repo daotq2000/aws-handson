@@ -24,6 +24,6 @@ public class LambdaDeleteDataFunction implements RequestHandler<Map<String,Strin
                .withTableName(TABLE_NAME)
                .withKey(key);
        ddb.deleteItem(request);
-        return null;
+        return "Delete successfullyt";
     }
 }

@@ -1,0 +1,29 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Notes resources",
+        "version": "1.0"
+    },
+    "paths": {
+        "/fetch-notes": {
+            "get": {
+                "summary": "Fetch notes resources",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+        "/add-notes": {
+            "post": {
+                "summary": "Add notes resources",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        }
+    }
+}
