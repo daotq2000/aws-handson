@@ -1,11 +1,4 @@
 phases:
-  pre_build:
-    commands:
-      # Install AWS CLI
-      - apt-get update
-      - apt-get install -y awscli
-      - export JAVA_HOME=$(/usr/libexec/java_home)
-      - export PATH=$JAVA_HOME/jre/bin:$PATH
   build:
     commands:
         - echo "Starting batch pipeline..."
