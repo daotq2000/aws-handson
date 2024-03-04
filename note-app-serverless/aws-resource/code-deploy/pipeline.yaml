@@ -10,7 +10,7 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      # Install AWS CLI 
+      # Install AWS CLI  
       - apt-get update
       - apt-get install -y awscli
   build:
