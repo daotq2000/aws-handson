@@ -3,9 +3,12 @@ phases:
   install:
     runtime-versions:
       java: corretto11
+    commands:
+      - export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
+      - export PATH=$JAVA_HOME/bin:$PATH
   build:
     commands:
+      - ls
+      - cd note-app-serverless/aws-serverless-note-app
+      - ls -lrt
       - ./mvnw clean package -DskipTests=true
-artifacts:
-  files:
-    - target/*.jar  
