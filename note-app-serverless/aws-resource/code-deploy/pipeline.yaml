@@ -7,9 +7,6 @@ evn:
     LAMBDA_FUNCTION_NAME_1: "LambdaAddDataFunction"
     LAMBDA_FUNCTION_NAME_2: "LambdaDeleteNote"
     LAMBDA_FUNCTION_NAME_3: "LambdaFetchDataFunction"
-    AWS_REGION: "us-east-1"
-    AWS_ACCESS_KEY_ID: "AKIA6Z3Z6Z6Z6Z6Z6Z6Z6"
-    AWS_SECRET_ACCESS_KEY: "Ev4EXYd3WK+xn7Cji8SisD+b5bhaKTm6PCCar3uV"
 phases:
   pre_build:
     commands:
