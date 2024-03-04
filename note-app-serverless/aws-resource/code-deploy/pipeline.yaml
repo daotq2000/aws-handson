@@ -1,0 +1,22 @@
+phases:
+  build:
+    commands:
+       - cd note-app-serverless/aws-serverless-note-app && ./mvnw -DskipTests clean package
+        - aws s3 cp note-app-serverless/aws-serverless-note-app/target/aws-serverless-note-app-0.0.1-SNAPSHOT.jar s3://cf-templates-1ohbdpx0bstp8-us-east-1/aws-serverless-note-app-0.0.1-SNAPSHOT.jar
+        - export S3_URL=$(aws s3 presign s3://cf-templates-1ohbdpx0bstp8-us-east-1/aws-serverless-note-app-0.0.1-SNAPSHOT.jar --expires-in 3600)
+        - aws lambda update-function-code --function-name LambdaAddDataFunction --s3-bucket cf-templates-1ohbdpx0bstp8-us-east-1 --s3-key aws-serverless-note-app-0.0.1-SNAPSHOT.jar
+        - aws lambda update-function-code --function-name LambdaDeleteNote --s3-bucket cf-templates-1ohbdpx0bstp8-us-east-1 --s3-key aws-serverless-note-app-0.0.1-SNAPSHOT.jar
+        - aws lambda update-function-code --function-name LambdaFetchDataFunction --s3-bucket cf-templates-1ohbdpx0bstp8-us-east-1 --s3-key aws-serverless-note-app-0.0.1-SNAPSHOT.jar
+
+  post_build:
+    commands:
+      # Upload JAR file to S3
+      - aws s3 cp note-app-serverless/aws-serverless-note-app/target/aws-serverless-note-app-0.0.1-SNAPSHOT.jar s3://cf-templates-1ohbdpx0bstp8-us-east-1/aws-serverless-note-app-0.0.1-SNAPSHOT.jar
+      
+      # Get public URL of the uploaded JAR file
+      - export S3_URL=$(aws s3 presign s3://cf-templates-1ohbdpx0bstp8-us-east-1/aws-serverless-note-app-0.0.1-SNAPSHOT.jar --expires-in 3600)
+      
+      # Update Lambda function code with the new JAR file from S3
+      - aws lambda update-function-code --function-name LambdaAddDataFunction --s3-bucket cf-templates-1ohbdpx0bstp8-us-east-1 --s3-key aws-serverless-note-app-0.0.1-SNAPSHOT.jar
+      - aws lambda update-function-code --function-name LambdaDeleteNote --s3-bucket cf-templates-1ohbdpx0bstp8-us-east-1 --s3-key aws-serverless-note-app-0.0.1-SNAPSHOT.jar
+      - aws lambda update-function-code --function-name LambdaFetchDataFunction --s3-bucket cf-templates-1ohbdpx0bstp8-us-east-1 --s3-key aws-serverless-note-app-0.0.1-SNAPSHOT.jar
