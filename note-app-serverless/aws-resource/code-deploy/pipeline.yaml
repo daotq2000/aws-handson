@@ -1,7 +1,4 @@
 phases:
-  install:
-    runtime-versions:
-      java: openjdk11
   pre_build:
     commands:
       # Install AWS CLI
