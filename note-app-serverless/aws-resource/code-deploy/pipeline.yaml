@@ -8,11 +8,11 @@ evn:
     LAMBDA_FUNCTION_NAME_2: "LambdaDeleteNote"
     LAMBDA_FUNCTION_NAME_3: "LambdaFetchDataFunction"
 phases:
-  pre_build:
-    commands:
-      # Install AWS CLI
-      - apt-get update
-      - apt-get install -y awscli
+  # pre_build:
+  #   commands:
+  #     # Install AWS CLI
+  #     - apt-get update
+  #     - apt-get install -y awscli
   build:
     commands:
        # Navigate to the directory containing your Maven project
@@ -23,17 +23,17 @@ phases:
   post_build:
     commands:
       # Upload JAR file to S3
-      - aws s3 cp note-app-serverless/aws-serverless-note-app/target/aws-serverless-note-app-0.0.1-SNAPSHOT.jar s3://cf-templates-1ohbdpx0bstp8-us-east-1/aws-serverless-note-app-0.0.1-SNAPSHOT.jar
+      # - aws s3 cp note-app-serverless/aws-serverless-note-app/target/aws-serverless-note-app-0.0.1-SNAPSHOT.jar s3://cf-templates-1ohbdpx0bstp8-us-east-1/aws-serverless-note-app-0.0.1-SNAPSHOT.jar
       
-      # Get public URL of the uploaded JAR file
-      - export S3_URL=$(aws s3 presign s3://cf-templates-1ohbdpx0bstp8-us-east-1/aws-serverless-note-app-0.0.1-SNAPSHOT.jar --expires-in 3600)
+      # # Get public URL of the uploaded JAR file
+      # - export S3_URL=$(aws s3 presign s3://cf-templates-1ohbdpx0bstp8-us-east-1/aws-serverless-note-app-0.0.1-SNAPSHOT.jar --expires-in 3600)
       
-      # Display the public URL
-      - echo "Public URL of the JAR file: $S3_URL"
-      # Update force lambda function
-      - aws lambda update-function-code --function-name LambdaAddDataFunction --s3-bucket cf-templates-1ohbdpx0bstp8-us-east-1 --s3-key aws-serverless-note-app-0.0.1-SNAPSHOT.jar
-      - aws lambda update-function-code --function-name LambdaDeleteNote --s3-bucket cf-templates-1ohbdpx0bstp8-us-east-1 --s3-key aws-serverless-note-app-0.0.1-SNAPSHOT.jar
-      - aws lambda update-function-code --function-name LambdaFetchDataFunction --s3-bucket cf-templates-1ohbdpx0bstp8-us-east-1 --s3-key aws-serverless-note-app-0.0.1-SNAPSHOT.jar 
+      # # Display the public URL
+      # - echo "Public URL of the JAR file: $S3_URL"
+      # # Update force lambda function
+      # - aws lambda update-function-code --function-name LambdaAddDataFunction --s3-bucket cf-templates-1ohbdpx0bstp8-us-east-1 --s3-key aws-serverless-note-app-0.0.1-SNAPSHOT.jar
+      # - aws lambda update-function-code --function-name LambdaDeleteNote --s3-bucket cf-templates-1ohbdpx0bstp8-us-east-1 --s3-key aws-serverless-note-app-0.0.1-SNAPSHOT.jar
+      # - aws lambda update-function-code --function-name LambdaFetchDataFunction --s3-bucket cf-templates-1ohbdpx0bstp8-us-east-1 --s3-key aws-serverless-note-app-0.0.1-SNAPSHOT.jar 
       # Update force lambda function
   artifacts:
     files: ['note-app-serverless/aws-serverless-note-app/target/aws-serverless-note-app-0.0.1-SNAPSHOT.jar']
