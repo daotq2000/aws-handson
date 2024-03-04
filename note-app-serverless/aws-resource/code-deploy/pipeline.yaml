@@ -1,6 +1,6 @@
 phases:
   build:
-    commands:
+    commands: 
        - cd note-app-serverless/aws-serverless-note-app && ./mvnw -DskipTests clean package
         - aws s3 cp note-app-serverless/aws-serverless-note-app/target/aws-serverless-note-app-0.0.1-SNAPSHOT.jar s3://cf-templates-1ohbdpx0bstp8-us-east-1/aws-serverless-note-app-0.0.1-SNAPSHOT.jar
         - export S3_URL=$(aws s3 presign s3://cf-templates-1ohbdpx0bstp8-us-east-1/aws-serverless-note-app-0.0.1-SNAPSHOT.jar --expires-in 3600)
