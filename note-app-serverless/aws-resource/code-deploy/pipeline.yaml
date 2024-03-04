@@ -13,8 +13,6 @@ phases:
       - cd note-app-serverless/aws-serverless-note-app
       - ls -lrt
       - mvn clean package -DskipTests=true
-  post_build:
-    commands:
       # Upload JAR file to S3
       - aws s3 cp note-app-serverless/aws-serverless-note-app/target/aws-serverless-note-app-0.0.1-SNAPSHOT.jar s3://cf-templates-1ohbdpx0bstp8-us-east-1/aws-serverless-note-app-0.0.1-SNAPSHOT.jar
       
