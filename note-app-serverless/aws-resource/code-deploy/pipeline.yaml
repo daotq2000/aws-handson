@@ -8,4 +8,4 @@ phases:
       - ./mvnw clean package -DskipTests=true
 artifacts:
   files:
-    - target/*.jar
+    - target/*.jar 
